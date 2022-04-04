@@ -1,5 +1,11 @@
+
 <!DOCTYPE html>
 <html>
 <h1>Skye's Handsmade</h1>
 <h2>One for all!</h2>
+{% for o in product_list %}
+    <tr class="{% cycle 'row1' 'row2' %}">
+        ...
+    </tr>
+{% endfor %}
 </html>
