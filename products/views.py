@@ -1,4 +1,5 @@
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
+
 from products.models import Product, ProductInCart
 
 
@@ -20,4 +21,3 @@ class ProductDetailView(DetailView):
 class ProductInCartCreateView(CreateView):
     model = Product
     template_name = "products,products_in_cart_create.html"
-)
