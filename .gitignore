@@ -7,12 +7,14 @@ __pycache__
 .env
 myvenv/
 venv/
+django-env/
 
 # Database
 db.sqlite3
 
 # Static folder at project root
 /static/
+uploads/
 
 # Visual Studio
 .vscode/
