@@ -1,14 +1,11 @@
 
-<!DOCTYPE html>
 <html>
-<h1>Skye's Handsmade</h1>
-<h2>One for all!</h2>
 
 {% for product in object_list %}
     {{product.name}}]
     {{product.price}}
     {{product.description}}
-    {{product.image}}
+    <img src="{{product.image.url}}">
 
 {% endfor %}
 </html>
