@@ -2,7 +2,7 @@
 <html>
 
 {% for product in object_list %}
-    {{product.name}}]
+   <b {{product.name}}] b/>
     {{product.price}}
     {{product.description}}
     <img src="{{product.image.url}}">
