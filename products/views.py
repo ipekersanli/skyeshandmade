@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, View
 from products.models import Product, ProductInCart
@@ -26,6 +27,8 @@ class ProductDetailView(DetailView):
 class ProductInCartCreateView(View):
     def get(self, request, *args, **kwargs):
         ProductInCartCreateView.request.user=self.request.user
+        ProductInCartCreateView.kwargs
+        
         # product in cart yarat, customer olarak request.user kullanabilirsin
         # url lere ekledim, add-to-cart/5 e erisilirse id'si 5 olan product, product in cart objesinin,
         # product'u olacak, yazdigin modelleri unutma bol bol googlla,
