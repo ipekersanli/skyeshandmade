@@ -1,0 +1,16 @@
+{% load static %}
+<h4>{{ user }}</h4>
+<h5><a href="/logout">Log Out</a></h5>
+{% for product_in_cart in object_list %}
+    <div class="product">
+        <h2>{{ product_in_cart.product.name }}</h2>
+        <img src="{{ product.image.url }}">
+        <h4>Price:</h4>
+        <p>{{ product_in_cart.product.price }}</p>
+        <h4>Description:</h4>
+        <p>{{ product_in_cart.product.description }}</p>
+        <h4>Amount {{ product_in_cart.amount }}</h4>
+        <h4><a href="/add-to-cart/{{ product.id }}">Add Another</a></h4>
+        <h4><a href="/add-to-cart/{{ product.id }}">Add Another</a></h4>
+    </div>
+{% endfor %}

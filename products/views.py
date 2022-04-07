@@ -1,4 +1,3 @@
-from pyexpat import model
 from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, View
 from products.models import Product, ProductInCart
@@ -12,25 +11,38 @@ class ProductListView(ListView):
 
 
 class ProductInCartListView(ListView):
-    template_name = 'products/products_in_cart.html'
+    template_name = 'products/cart.html'
 
     def get_queryset(self):
         ProductInCart.objects.filter(user=self.request.user)
 
 
-class ProductDetailView(DetailView):
-    model = Product
-    template_name = 'products/product_detail.html'
-
-
 @method_decorator(login_required, name='get')
 class ProductInCartCreateView(View):
     def get(self, request, *args, **kwargs):
-        ProductInCartCreateView.request.user=self.request.user
-        ProductInCartCreateView.kwargs
-        
-        # product in cart yarat, customer olarak request.user kullanabilirsin
-        # url lere ekledim, add-to-cart/5 e erisilirse id'si 5 olan product, product in cart objesinin,
-        # product'u olacak, yazdigin modelleri unutma bol bol googlla,
-        # bu sayiya kwargs['product_id'] ile erisebilirsin.
-        return redirect('/') 
+        product = Product.objects.get(pk=kwargs['product_id'])
+        is_in_cart = ProductInCart.objects.filter(product=product).exists()
+        if is_in_cart:
+            product_in_cart = ProductInCart.objects.get(product=product)
+            product_in_cart.amount += 1
+            product_in_cart.save()
+        else:
+            product_in_cart = ProductInCart()
+            product_in_cart.customer = request.user
+            product_in_cart.product = product
+            product_in_cart.amount = 1
+            product_in_cart.save()
+        return redirect('/cart')
+
+
+@method_decorator(login_required, name='get')
+class ProductInCartDeleteView(View):
+    def get(self, request, *args, **kwargs):
+        product = Product.objects.get(pk=kwargs['product_id'])
+        product_in_cart = ProductInCart.objects.get(product=product)
+        if product_in_cart.amount > 1:
+            product_in_cart.amount -= 1
+            product_in_cart.save()
+        else:
+            product_in_cart.delete()
+        return redirect('/cart')

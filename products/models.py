@@ -13,6 +13,6 @@ class Product(models.Model):
 
 
 class ProductInCart(models.Model):
-    customer = models.OneToOneField(User, on_delete=models.CASCADE)
-    product = models.OneToOneField("products.Product", on_delete=models.CASCADE)
+    customer = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey("products.Product", on_delete=models.CASCADE)
     amount = models.IntegerField()
