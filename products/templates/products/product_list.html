@@ -1,14 +1,20 @@
 
-<!DOCTYPE html>
 <html>
-<h1>Skye's Handsmade</h1>
-<h2>One for all!</h2>
+    <title> Products </title>
+    <head>
+        <h1 style="color;white","background-color;purple"> AT SKYE'S THERE IS ONE FOR EVERYONE </h1>
 
 {% for product in object_list %}
-    {{product.name}}]
+   <img src="{{product.image.url}}">
+   <article>
+   <b {{product.name}}] b/>
     {{product.price}}
-    {{product.description}}
-    {{product.image}}
+   </article>
+    <div class="card-body">
+          <p class="card-text">{{product.description}}</p>
+          <div class="d-flex justify-content-between align-items-center">
+            <div class="btn-group">
+                <button type="button" class="btn btn-sm btn-outline-secondary"> add to cart</button>
 
 {% endfor %}
 </html>

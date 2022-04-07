@@ -1,3 +1,4 @@
+from pyexpat import model
 from django.shortcuts import redirect
 from django.views.generic import ListView, DetailView, View
 from products.models import Product, ProductInCart
@@ -25,8 +26,11 @@ class ProductDetailView(DetailView):
 @method_decorator(login_required, name='get')
 class ProductInCartCreateView(View):
     def get(self, request, *args, **kwargs):
+        ProductInCartCreateView.request.user=self.request.user
+        ProductInCartCreateView.kwargs
+        
         # product in cart yarat, customer olarak request.user kullanabilirsin
         # url lere ekledim, add-to-cart/5 e erisilirse id'si 5 olan product, product in cart objesinin,
         # product'u olacak, yazdigin modelleri unutma bol bol googlla,
         # bu sayiya kwargs['product_id'] ile erisebilirsin.
-        return redirect('/') # bu da operasyon bitince redirectliyor, tirnak icindeki urlye
+        return redirect('/') 
